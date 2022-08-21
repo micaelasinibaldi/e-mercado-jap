@@ -5,6 +5,10 @@
   font-family: 'Raleway', serif !important;
 }
 
+body {
+  background-color: #f8f9fa;
+}
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -187,4 +191,55 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+.alerterror {
+  color: red;
+  display: none;
+  font-size: 14px;
+}
+
+
+.borderojo{
+  border: red 1px solid;
+}
+
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Raleway', serif !important;
+  text-align: center;
+}
+
+.container-login img {
+ width: 40%;
+ margin-bottom: 20px;
+
+}
+
+.btn-primary {
+  margin-top: 20px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.container-login fieldset {
+  position: relative;
+}
+
+.fa {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 5px;
+  color: red;
+  font-size: 14px;
+}
+
+.show {
+  display: block;
 }

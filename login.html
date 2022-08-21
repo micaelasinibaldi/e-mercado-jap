@@ -8,7 +8,10 @@
   
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  
+
   <style>
     body {
       background-color: rgb(248, 249, 250);
@@ -18,10 +21,26 @@
 
 <body>
   <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="container-login">
+      <img src="/img/login.png">
+      <h2>Inicio de sesión</h2>
+      <form action="index.html" method="get" id="formLogin" class="">
+        <label for="email" class="form-label">Email</label>
+        <fieldset>
+          <input id="email" type="email" class="form-control" name="email">
+          <i class="fa fa-exclamation-circle" id="exclamation-email"></i>
+          <p class="alerterror" id="alert-email">Ingresa tu email</p>
+        </fieldset>
+        <label for="password" class="form-label" >Contraseña</label>
+        <fieldset>
+          <input id="password" type="password" class="form-control" name="password">
+          <i class="fa fa-exclamation-circle" id="exclamation-password"></i>
+          <p class="alerterror" id="alert-password">Ingresa tu contraseña</p>
+        </fieldset>
+        <button class="btn btn-primary" type="submit" id="logBtn">Ingresar</button>
+        
+      </form>
+
     </div>
   </main>
   <footer class="text-muted">
@@ -34,6 +53,7 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
   <script src="js/login.js"></script>
 </body>
 
