@@ -38,4 +38,13 @@ let getJSONData = function(url){
         hideSpinner();
         return result;
     });
+  
+  
 }
+
+let usuarioLog = localStorage.getItem("email");
+
+document.getElementById("usuario-log").innerHTML += `
+    <a class=nav-link> ` + usuarioLog + ` </a>
+    `;
+   

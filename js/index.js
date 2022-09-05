@@ -15,5 +15,8 @@ document.addEventListener("DOMContentLoaded", function(){
     if (new URLSearchParams(window.location.search).get("email") == null || new URLSearchParams(window.location.search).get("password") == null){
         window.location.href = "login.html";
     }
-
+    
+    
+    
+    
 });

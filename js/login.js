@@ -28,7 +28,7 @@ document.getElementById('formLogin').addEventListener('submit', function(evento)
 
         }
 
-    
+        localStorage.setItem("email", email.value);
 });
 
    
