@@ -6,6 +6,12 @@ const ORDER_BY_PROD_REL = "Rel";
 let currentProductsArray = [];
 let currentSortCriteria = undefined;
 
+function setProductosID(id) {
+    localStorage.setItem("productosID", id);
+    window.location = "product-info.html"
+    console.log(id);    
+}
+
 document.addEventListener('DOMContentLoaded', function(){
 
    const PRODUCTOS_URL = 'https://japceibal.github.io/emercado-api/cats_products/'+localStorage.getItem("catID")+'.json';
@@ -15,13 +21,14 @@ document.addEventListener('DOMContentLoaded', function(){
     let rangeFilterCount = document.getElementById('rangeFilterCount');
     let clearRangeFilter = document.getElementById("clearRangeFilter");
 
+    
 
     function mostrarProductos (){
         divListaProductos.innerHTML = '';
         for (let i=0; i < productos.length; i++) {
             divListaProductos.innerHTML  += 
             `
-            <div class="list-group-item list-group-item-action">   
+            <div onclick="setProductosID(`+ productos[i].id +`)" class="list-group-item list-group-item-action">   
                 <div class="row">
                     <div class="col-3">
                             <img src="` + productos[i].image + `" alt="product image" class="img-thumbnail">
@@ -142,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById("sortByRel").addEventListener("click", function(){
         sortAndShowProducts(ORDER_BY_PROD_REL, productosTodos);
     });   
+
+ 
 })
 
 
