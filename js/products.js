@@ -14,7 +14,7 @@ function setProductosID(id) {
 
 document.addEventListener('DOMContentLoaded', function(){
 
-   const PRODUCTOS_URL = 'https://japceibal.github.io/emercado-api/cats_products/'+localStorage.getItem("catID")+'.json';
+    const PRODUCTOS_URL = 'https://japceibal.github.io/emercado-api/cats_products/'+localStorage.getItem("catID")+'.json';
     let divListaProductos = document.getElementById('products');
     let rangeFilterCountMin = document.getElementById('rangeFilterCountMin');
     let rangeFilterCountMax = document.getElementById('rangeFilterCountMax');

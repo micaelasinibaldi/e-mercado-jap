@@ -1,6 +1,11 @@
 let productoInfo = [];
 let  productoComentarios = [];
 
+function redirigirProductosID(id) {
+    localStorage.setItem("productosID", id);
+     window.location = "product-info.html";   
+ }
+
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -9,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let divProductoInfo = document.getElementById('container-Productoinfo');
     let divImagenes = document.getElementById('imagenes');
     let divComentarios = document.getElementById('comentarios');
+    let divProductosRelacionados = document.getElementById('productos-relacionados')
 
   
    function mostrarImagenes(){
@@ -41,6 +47,20 @@ function mostrarComentarios(){
        
     }}
 
+    function mostrarProductosRelacionados(){
+
+    for (let i=0; i < productoInfo.relatedProducts.length; i++) {
+        divProductosRelacionados.innerHTML +=
+        `<div onclick="redirigirProductosID(${productoInfo.relatedProducts[i].id})">
+
+            <img src="${productoInfo.relatedProducts[i].image}" alt="product image" class="img-thumbnail"></img>
+            <p>${productoInfo.relatedProducts[i].name}</p>
+
+        </div>`;
+        
+    }
+    }
+    //onclick="setProductosID(${productoInfo.relatedProducts[i].id})
 
 
     function mostrarProductoInfo (){       
@@ -73,6 +93,8 @@ function mostrarComentarios(){
         productoInfo = datos;
         mostrarProductoInfo();
         mostrarImagenes();
+        console.log(productoInfo);
+        mostrarProductosRelacionados()
         
     });
 
