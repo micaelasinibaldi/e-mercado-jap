@@ -18,10 +18,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
   
    function mostrarImagenes(){
-    for (let i=0; i < productoInfo.images.length; i++) {
+     
+       
+        for (let i=0; i < productoInfo.images.length; i++) {
        divImagenes.innerHTML +=
-       `
-        <img src="` + productoInfo.images[i] + `" alt="product image" class="img-thumbnail"></img>`;
+       `        
+        <img src="` + productoInfo.images[i] + `" alt="product image" class="img-thumbnail"></img> `;
         
     }}
 

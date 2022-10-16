@@ -261,3 +261,41 @@ a.custom-card:hover {
 .comentario {
   width: 60%;
 }
+
+.img-cart{
+ width:100% ;
+ float: left;
+}
+
+.td-img{
+width: 50px;
+
+}
+
+.cart{
+  width: 60%;
+  margin-left: 20%;
+}
+
+.cart-title{
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.cart-art{
+  margin-left: 20%;
+}
+.num{
+  margin-left: 250px;
+}
+
+.direccion{
+  margin-top: 20px;
+}
+
+.calle{
+  width: 270px;
+  margin-right: 20px;
+}
