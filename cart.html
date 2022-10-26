@@ -38,26 +38,116 @@
   <main>
     <h4 class="cart-title">Carrito de compras</h4>
     <h6 class="cart-art">Articulos a comprar</h6>
+    <form class="needs-validation" novalidate>
     <div id="container">     
     </div>
     <hr class="cart">
-    <h6 class="cart-art">Tipo de envío</h6>
-    <form class="cart-art">
-      <input type="radio" id="premium" name="envio" value="premium" checked>
-      <label for="premium">Premium 2 a 5 dias (%15)</label><br>
-      <input type="radio" id="express" name="envio" value="express">
-      <label for="express">Express 5 a 8 dias (%7)</label><br>
-      <input type="radio" id="standar" name="envio" value="standard">
-      <label for="standard">Standard 12 a 15 dias (%5)</label>
-      <h6 class="direccion">Direccion de envío</h6>
-      <label for="calle">Calle:</label>  <label for="numero" class="num">Numero:</label><br>
-      <input  class="calle" type="text" id="calle" name="calle"> <input type="text" id="numero" name="numero"><br>
-     
+    <div id="tipoEnvio">
+      <div class="cart">
+        <h6>Tipo de envío</h6>
+        
+        <input type="radio" id="premium" name="envios" value="premium" checked onclick="envio();totalCambio();">
+        <label for="premium">Premium 2 a 5 dias (%15)</label><br>
+        <input type="radio" id="express" name="envios" value="express" onclick="envio();totalCambio();">
+        <label for="express">Express 5 a 8 dias (%7)</label><br>
+        <input type="radio" id="standar" name="envios" value="standard" onclick="envio();totalCambio();">
+        <label for="standard">Standard 12 a 15 dias (%5)</label>
+
+        <h6 class="direccion">Direccion de envío</h6>
+        <div class="direccion">
+          <label for="calle">Calle:</label> 
+          <input  class="form-control" type="text" id="calle" name="calle" required>
+          <div class="invalid-feedback">
+            Ingresa una calle
+          </div>
+          <label for="numero">Numero:</label>
+          <input type="text" class="form-control" id="numero" name="numero" required><br>
+          <div class="invalid-feedback">
+            Ingresa un numero
+          </div>
+          <label for="esquina">Esquina:</label><br>
+          <input  class="form-control" type="text" id="esquina" name="esquina" required>
+          <div class="invalid-feedback">
+            Ingresa una esquina
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div id="costos-envio">
+      <div id="costos"></div>
+      <div id="total"></div>
+    </div>
+    <div id="modal" class="cart">
+      <hr>
+      <div>
+        <h6>Forma de pago</h6>
+        <p id="formaPago">No ha seleccionado</p>
+      </div>
+      <div>
+        <button type="button" class="seleccionar-pago" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="botonpago">
+         Seleccionar</button>
+      </div>
       
-      <label for="esquina">Esquina:</label><br>
-      <input  class="calle" type="text" id="esquina" name="esquina">
       
-    </form>
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Forma de Pago</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="RadioPago" id="flexRadiotarjeta" onclick="modalCredito();">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Tarjeta de credito
+                  </label>
+                  <hr>
+                  <label name="number-tarjeta" for="num-tarjeta-cred">Numero de tarjeta</label>
+                  <input type="number" name="number-tarjeta" id="numtarjetacred" required>
+                  <div class="invalid-feedback">
+                    Ingresa un numero de tarjeta
+                  </div>
+                  <label name="codigo-tarjeta" for="cod-tarjeta">Codigo de seguridad</label>
+                  <input type="number" name="cod-tarjeta" id="codtarjeta" required>
+                  <div class="invalid-feedback">
+                    Ingresa el codigo de seguridad
+                  </div>
+                  <label name="vencimiento-tarjeta" for="venctarjeta">Vencimiento</label>
+                  <input type="date" name="vencimiento-tarjeta" id="venctarjeta" required>
+                  <div class="invalid-feedback">
+                    Ingresa la fecha de vencimiento
+                  </div>
+                  <hr>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="RadioPago" id="flexRadiodebito" onclick="modalTransferencia()">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Transferencia bancaria 
+                  </label>
+                  <hr>
+                  <label name="number-tarjeta" for="num-tarjeta-tranf">Numero de cuenta</label>
+                  <input type="number" name="number-tarjeta" id="numtarjetatranf" required>
+                  <div class="invalid-feedback">
+                    Ingresa un numero de cuenta
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrar" onclick="cerrarpago()">Cerrar</button>
+                </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-grid gap-2">
+      <button class="btn btn-primary cart" type="submit" onclick="cerrarpago()">Finalizar compra</button>
+    </div>
+    <div id="success"></div>
+  </form>
+    
     
   </main>
   <footer class="text-muted">

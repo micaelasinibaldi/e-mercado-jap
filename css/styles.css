@@ -287,15 +287,56 @@ width: 50px;
 .cart-art{
   margin-left: 20%;
 }
-.num{
-  margin-left: 250px;
-}
 
 .direccion{
   margin-top: 20px;
 }
 
-.calle{
-  width: 270px;
-  margin-right: 20px;
+
+#costos-envio{
+
+width: 60%;
+margin-left: 20%;
+}
+
+.precio-unitario{
+  display: flex;
+}
+
+.seleccionpago{
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: #dc3545;
+}
+
+.moneda{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.direccion{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+#modal{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  
+}
+
+.seleccionar-pago{
+  background-color: #f8f9fa;
+  border: none;
+  color: #0087F7;
+  text-decoration: underline;
+}
+
+#botonpago{
+  width: 30%;
+  float: right;
 }
