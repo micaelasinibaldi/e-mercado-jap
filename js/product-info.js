@@ -3,9 +3,22 @@ let  productoComentarios = [];
 
 function redirigirProductosID(id) {
     localStorage.setItem("productosID", id);
-     window.location = "product-info.html";   
+    window.location = "product-info.html";   
  }
 
+ 
+ let listacart = JSON.parse(localStorage.getItem("prodCarrito"));
+ console.log(listacart);
+
+ function agregarcart(){
+
+    listacart.push(productoInfo);
+    localStorage.setItem("prodCarrito", JSON.stringify(listacart));
+    
+ }
+
+
+ 
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -30,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function(){
 function mostrarComentarios(){
     for (let i=0; i < productoComentarios.length; i++) {
         let innerComment = '';
+        
         innerComment +=
        `<div class="score">`;
             for (let e=1; e <= 5; e++){
@@ -62,7 +76,7 @@ function mostrarComentarios(){
         
     }
     }
-    //onclick="setProductosID(${productoInfo.relatedProducts[i].id})
+    
 
 
     function mostrarProductoInfo (){       
@@ -106,8 +120,6 @@ function mostrarComentarios(){
     
     productoComentarios = datos;
     
-    
-   console.log(productoComentarios);
-   mostrarComentarios();
+    mostrarComentarios();
 }); 
 })

@@ -1,7 +1,6 @@
 let articuloscart = [];
+let articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));;
 let DivTablaCarrito = document.getElementById("container");
-let DivCostos = document.getElementById("costos");
-//let DivEnvio = document.getElementById("tipoEnvio");
 let DivTotal = document.getElementById("total");
 let numtarjetacred = document.getElementById('numtarjetacred');
 let codtarjetacred = document.getElementById('codtarjeta');
@@ -10,62 +9,62 @@ let numtarjetadebito = document.getElementById('numtarjetatranf');
 let seleccionpago = document.getElementById('formaPago');
 let tarjetaselec = document.getElementById('flexRadiotarjeta');
 let debitoselec = document.getElementById('flexRadiodebito');
+let sumasubtotales = [];
+let CalculoEnvio = document.getElementById('calEnvio');
+let premium = document.getElementById('premium');
+let express = document.getElementById('express');
+let standar = document.getElementById('standar');
+let subtotalGen = document.getElementById('subtotalGeneral');
+let costEnviototal = 0;
+let costEnvio = 0.15;
+let subtotal = 0;
+let total = 0;
+
+console.log(articuloscarrito);
 
 function setValue() {
-  let cantValue = document.getElementById('cant').value;
-  let subtotal = document.getElementById('subtotal');
 
+  let subtotalParcial = 0;
+  subtotal = 0;
 
-  if (cantValue > 1) {
-    subtotal.innerHTML =
+  for (let i = 0; i < articuloscarrito.length; i++) {
 
-      `${cantValue * articuloscart[0].unitCost}`;
-  } else {
-    subtotal.innerHTML =
-      `${articuloscart[0].unitCost}`;
+    let subtotalProd = DivTablaCarrito.getElementsByTagName("p")[i];
+    let cant = DivTablaCarrito.getElementsByTagName("input")[i].value;
+
+    if (cant >= 1 && articuloscarrito[i].currency == 'USD') {
+      subtotalParcial = cant * parseInt(articuloscarrito[i].cost);
+
+    } else if (cant >= 1 && articuloscarrito[i].currency !== 'USD') {
+
+      subtotalParcial = cant * (parseInt(articuloscarrito[i].cost) / 40);
+    }
+    else {
+      subtotalParcial = parseInt(articuloscarrito[i].cost);
+    }
+    subtotal += subtotalParcial;
+    subtotalProd.innerHTML = `${subtotalParcial}`;
   }
 
+  subtotalGen.innerHTML = `${subtotal}`;
+  envio(costEnvio);
 }
 
 
-function envio() {
-  let subtotalGen = document.getElementById('subtotalGeneral').textContent;
-  let CalculoEnvio = document.getElementById('calEnvio');
-  let premium = document.getElementById('premium');
-  let express = document.getElementById('express');
-  let standar = document.getElementById('standar');
-
-  if (express.checked == true) {
-    CalculoEnvio.innerHTML =
-      `${Math.round(parseInt(subtotalGen) * 0.07)}`;
-
-  } else if (standar.checked == true) {
-    CalculoEnvio.innerHTML =
-      ` ${Math.round(parseInt(subtotalGen) * 0.05)}`;
-  } else if (premium.checked == true) {
-    CalculoEnvio.innerHTML =
-      `${Math.round(parseInt(subtotalGen) * 0.15)}`;
-
-  }
+function envio(porcentaje) {
+  console.log('subtotal ' + subtotal);
+  console.log('porcentaje ' + porcentaje);
+  costEnvio = porcentaje;
+  costEnviototal = Math.round(subtotal * porcentaje);
+  CalculoEnvio.innerHTML = `${costEnviototal}`;
+  mostrartotal();
 }
 
-function subTotGen() {
-  let artSubtotal = document.getElementById('subtotal').textContent;
-  let subtotalGen = document.getElementById('subtotalGeneral');
 
-  subtotalGen.innerHTML =
-    `${artSubtotal}`;
-}
-
-function totalCambio() {
+function mostrartotal() {
   let totalT = document.getElementById('totalNum');
-  let envioT = document.getElementById('calEnvio').textContent;
-  let subtotalGen = document.getElementById('subtotalGeneral').textContent;
-  console.log(envioT);
-  console.log(subtotalGen);
-  totalT.innerHTML = `
-  <p> USD ${Math.round(parseInt(subtotalGen) + parseInt(envioT))}</p>
-  `;
+  total = subtotal + costEnviototal;
+  totalT.innerHTML = `USD${total}`;
 }
 
 
@@ -84,7 +83,6 @@ function modalTransferencia() {
   codtarjetacred.disabled = true;
   numtarjetadebito.disabled = false;
   venctarjetacred.disabled = true;
-
 
 }
 
@@ -114,13 +112,13 @@ function cerrarpago() {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-
   const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
   function tablaArticulos() {
 
+    var contenidoTabla = '';
 
-    DivTablaCarrito.innerHTML =
+    contenidoTabla +=
 
       `<table class="table cart">
             <thead>
@@ -132,63 +130,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 <th scope="col">Subtotal</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody>`;
+    for (let i = 0; i < articuloscarrito.length; i++) {
+
+      contenidoTabla +=
+
+        `
               <tr>
-                <td><img src="${articuloscart[0].image}" alt="product image" class="img-cart td-img"></td>
-                <td>${articuloscart[0].name}</td>
-                <td>${articuloscart[0].currency}  ${articuloscart[0].unitCost}</td>
-                <td><input class="img-cart"  type="number" id="cant" min="1" max"100" value="1"  onchange="setValue();subTotGen();envio();totalCambio();"></input></td>
-                <td>
-                  <div class="moneda">
-                    <p id="usd">USD</p>
-                    <p id="subtotal">${articuloscart[0].unitCost}</p>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>`;
-  }
+                <td><img src="${articuloscarrito[i].images[0]}" alt="product image" class="img-cart td-img"></td>
+                <td>${articuloscarrito[i].name}</td>
+                <td>${articuloscarrito[i].currency}  ${articuloscarrito[i].cost}</td>
+                <td><input class="img-cart"  type="number" id="cant" min="1" max"100" value="1"  onchange="setValue();"></input></td>
+                <td> 
+                  `;
+      if (articuloscarrito[i].currency !== 'USD') {
+        contenidoTabla +=
+          `<div class="moneda">
+                        <span>USD</span>
+                          <p>${parseInt(articuloscarrito[i].cost) / 40}</p>
+                        </div>
+                        `;
+      } else {
+        contenidoTabla +=
+          `<div class="moneda">
+                      <span>USD</span>
+                      <p>${articuloscarrito[i].cost}</p> </div>
+                      `;
+      }
 
-  function costos() {
-    let artSubtotal = document.getElementById('subtotal').textContent;
+      contenidoTabla +=
+        `</td></tr>`;
 
-    DivCostos.innerHTML = `
-    <hr>
-    <h6>Costos</h6>
-    <div class="list-group-item">
-      <div class="d-flex w-100 justify-content-between">
-        <div class="mb-1">
-          <p>Subtotal</p>
-          <small class="text-muted">Precio unitario del producto por cantidad</small>
-        </div>
-        <div class="precio-unitario">
-            <p>USD</p>
-            <p id="subtotalGeneral">${artSubtotal}</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="list-group-item">
-      <div class="d-flex w-100 justify-content-between">
-        <div class="mb-1">
-          <p>Costo de envio</p>
-          <small class="text-muted">Segun el tipo de envio</small>
-        </div>
-        <div class="precio-unitario">
-          <p class="precio-unitario">USD </p>
-          <p class="precio-unitario" id="calEnvio"> ${parseInt(artSubtotal) * 0.15}</p>
-        </div>
-      </div>
-    </div>
-`;
-  }
+    }
 
-  function total() {
-    let artSubtotal = document.getElementById('subtotalGeneral').textContent;
-    let costEnvio = document.getElementById('calEnvio').textContent;
+    contenidoTabla +=
+      `</tbody>
+        </table>`;
 
-    console.log(artSubtotal);
-    console.log(costEnvio);
+    DivTablaCarrito.innerHTML = contenidoTabla;
+
     DivTotal.innerHTML = `
     
     <div class="list-group-item">
@@ -197,22 +177,21 @@ document.addEventListener('DOMContentLoaded', function () {
           <p>Total ($)</p>
         </div>
       <div class="precio-unitario">
-        <p class="precio-unitario" id="totalNum">USD${Math.round(parseInt(artSubtotal) + parseInt(costEnvio))}</p>
+        <p class="precio-unitario" id="totalNum">USD${total}</p>
       </div>
     </div>
     
-
-    `
+    `;
 
   }
 
   (function () {
     'use strict'
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+
     var forms = document.querySelectorAll('.needs-validation')
     let alertsucces = document.getElementById('success')
-    // Loop over them and prevent submission
+
     Array.prototype.slice.call(forms)
       .forEach(function (form) {
         form.addEventListener('submit', function (event) {
@@ -223,22 +202,15 @@ document.addEventListener('DOMContentLoaded', function () {
             alertsucces.innerHTML =
               `<div class="alert alert-success" role="alert">
           Has comprado con éxito!
-        </div>`
+        </div>`;
           }
 
           form.classList.add('was-validated')
         }, false)
 
-
       })
 
   })()
-
-
-
-
-
-
 
   fetch(CART_INFO_URL)
     .then(respuesta => respuesta.json())
@@ -246,11 +218,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       articuloscart = datos.articles;
 
-      console.log(articuloscart);
       tablaArticulos();
-      costos();
-      total();
-
+      setValue();
     });
 
 })
