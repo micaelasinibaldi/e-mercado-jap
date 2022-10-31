@@ -6,8 +6,10 @@ function redirigirProductosID(id) {
     window.location = "product-info.html";   
  }
 
+ let listacart = [];
+
+ if (localStorage.getItem("prodCarrito") !== null) listacart = JSON.parse(localStorage.getItem("prodCarrito"));
  
- let listacart = JSON.parse(localStorage.getItem("prodCarrito"));
  console.log(listacart);
 
  function agregarcart(){
@@ -121,5 +123,6 @@ function mostrarComentarios(){
     productoComentarios = datos;
     
     mostrarComentarios();
+    
 }); 
 })
