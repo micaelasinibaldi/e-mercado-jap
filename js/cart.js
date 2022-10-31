@@ -1,5 +1,5 @@
 let articuloscart = [];
-let articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));;
+let articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));
 let DivTablaCarrito = document.getElementById("container");
 let DivTotal = document.getElementById("total");
 let numtarjetacred = document.getElementById('numtarjetacred');
@@ -19,7 +19,6 @@ let costEnviototal = 0;
 let costEnvio = 0.15;
 let subtotal = 0;
 let total = 0;
-
 console.log(articuloscarrito);
 
 function setValue() {
@@ -108,13 +107,24 @@ function cerrarpago() {
   }
 }
 
+function eliminarArt(idArt){
+
+  const removeArt = articuloscarrito.findIndex( item => item.id === idArt );
+
+  articuloscarrito.splice( removeArt, 1 );
+  console.log(articuloscarrito);
+  articuloscarrito = localStorage.setItem("prodCarrito", JSON.stringify(articuloscarrito));
+  location.reload();
+}
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
   const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
   function tablaArticulos() {
-
+   
     var contenidoTabla = '';
 
     contenidoTabla +=
@@ -130,6 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
               </tr>
             </thead>
             <tbody>`;
+    if (articuloscarrito.length == 0){
+        DivTablaCarrito.innerHTML = `
+        <div class="cart" ><p> No tienes ningun articulo en el carrito</p></div>`;
+      } else {
+    
     for (let i = 0; i < articuloscarrito.length; i++) {
 
       contenidoTabla +=
@@ -158,7 +173,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       contenidoTabla +=
-        `</td></tr>`;
+        `</td>
+        <td><button class="btn" type="button" onclick= "eliminarArt(${articuloscarrito[i].id});"><i class="fa fa-trash"></i></button></td></tr>`;
 
     }
 
@@ -166,7 +182,11 @@ document.addEventListener('DOMContentLoaded', function () {
       `</tbody>
         </table>`;
 
-    DivTablaCarrito.innerHTML = contenidoTabla;
+
+  DivTablaCarrito.innerHTML = contenidoTabla;
+  
+}
+  
 
     DivTotal.innerHTML = `
     
@@ -181,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
     
     `;
-
+ 
   }
 
   (function () {
