@@ -52,8 +52,7 @@ function setValue() {
 
 
 function envio(porcentaje) {
-  console.log('subtotal ' + subtotal);
-  console.log('porcentaje ' + porcentaje);
+ 
   costEnvio = porcentaje;
   costEnviototal = Math.round(subtotal * porcentaje);
   CalculoEnvio.innerHTML = `${costEnviototal}`;
