@@ -1,5 +1,6 @@
 let articuloscart = [];
 let articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));
+if (localStorage.getItem("prodCarrito") !== null) articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));
 let DivTablaCarrito = document.getElementById("container");
 let DivTotal = document.getElementById("total");
 let numtarjetacred = document.getElementById('numtarjetacred');
