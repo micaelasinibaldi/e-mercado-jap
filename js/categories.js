@@ -5,6 +5,7 @@ let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
+divCatlist =  document.getElementById("cat-list-container");
 
 function sortCategories(criteria, array){
     let result = [];
@@ -67,7 +68,7 @@ function showCategoriesList(){
             `
         }
 
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+        divCatlist.innerHTML = htmlContentToAppend;
     }
 }
 
@@ -141,3 +142,5 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+
+

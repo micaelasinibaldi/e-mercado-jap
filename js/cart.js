@@ -118,6 +118,12 @@ function eliminarArt(idArt){
   location.reload();
 }
 
+function vaciarcarrito(){
+
+  articuloscarrito = [];
+  localStorage.setItem("prodCarrito", JSON.stringify(articuloscarrito));
+
+}
 
 
 document.addEventListener('DOMContentLoaded', function () {

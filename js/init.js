@@ -42,6 +42,10 @@ let getJSONData = function(url){
   
 }
 
+if (localStorage.getItem("email") == null) {
+  window.location.href = "login.html";
+}
+
 let usuarioLog = localStorage.getItem("email");
 
 document.getElementById("usuario-log").innerHTML += `
@@ -51,9 +55,9 @@ document.getElementById("usuario-log").innerHTML += `
 ${usuarioLog}
 </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li><a class="dropdown-item" href="/cart.html">Mi carrito</a></li>
-    <li><a class="dropdown-item" href="/my-profile.html">Mi perfil</a></li>
-    <li><a class="dropdown-item" href="/login.html">Cerrar Sesión</a></li>
+    <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+    <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+    <li><a class="dropdown-item" href="login.html">Cerrar Sesión</a></li>
   </ul>
 </div>`;
 

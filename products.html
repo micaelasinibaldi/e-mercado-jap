@@ -41,8 +41,8 @@
     <div class="container" >
       <div class="text-center p-4">
         <h1>Productos</h1>
-        <h5>Verás aquí todos los productos de la categoría <strong><span id="nombre-cat"></span></strong></h5>
-      </div>
+        <h5>Verás aquí todos los productos de la categoría <strong><span id="nombre-cat"></span></strong></h5><br>   
+    </div>
       <div class="row">
         <div class="col text-end">
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
@@ -55,10 +55,15 @@
           </div>
         </div>
       </div>
-
+      
       <div class="row">
-        <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+        <div class=" col-lg-6 offset-lg-6 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
+            <div class="col-lg-4">
+              <div class="input-group rounded">
+                <input id="buscador" type="search" class="form-control rounded" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" oninput="buscarArticulos();"/>
+              </div>
+            </div>
             <div class="col">
               <p class="font-weight-normal text-end my-2">Precio</p>
             </div>

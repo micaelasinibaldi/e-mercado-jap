@@ -36,37 +36,55 @@
       </div>
     </div>
   </nav>
-  <main class="main">
-    <div id="container-Productoinfo"></div>
-      <div id="agregarCart">
-        <button type="button" class="btn btn-success" onclick="agregarcart();">Agregar al carrito</button>
+  <main class="container">
+    <div class="row container p-0 m-0">
+      <div  id="container-Productoinfo"> 
       </div>
-    <div>
-      <h5>Imágenes ilustrativas</h5>
-      <div id="imagenes" class="img-productinfo">
+      <div  id="agregarCart">
+        <button id="btnCarrito" type="button" class="btn btn-success" onclick="agregarcart();">Comprar</button>
       </div>
     </div>
-    <div id="comentarios" >
+   
+    <div class="col container p-0 m-0">
+      <div class="col-lg-12">
+        <div>
+          <hr>
+          <h5>Imágenes ilustrativas</h5>
+          <div id="imagenes">
+          </div>
+          <hr>
+        </div>
+      
+    </div>
+    <div class="row container p-0 m-0" id="comentarios">     
       <h4> Comentarios</h4>
     </div>
-    <div id="comentar"class="div-comentarios">
+  </div>
+    <div class="row container p-0 m-0" id="comentar">
+      <hr>
       <h5>Comentar</h5>
-      <p>Tu opinion:</p>
-      <textarea name="paragraph_text" cols="10" rows="3" class="form-control comentario"></textarea>
-      <p>Tu puntuacion:</p>
-      <form name="formulario" method="post" action=" ">
-        <select name="puntaje">
-          <!-- Opciones de la lista -->
+      <form name="formulario" method="get" action="product-info.html">
+        <p>Tu opinion:</p>
+        <textarea name="paragraph_text" cols="10" rows="3" class="form-control comentario" id="comentario"></textarea>
+        <div class="col">
+        <span>Tu puntuacion:</span>
+        <select name="puntaje" id="puntaje" class="float">
           <option value="1">1</option>
-          <option value="2" >2</option> <!-- Opción por defecto -->
+          <option value="2">2</option> 
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5"selected>5</option>
         </select>
-      </form>
-      <button type="button" class="btn btn-primary my-3" id="enviar">Enviar</button>
+        <button type="button" for="formulario" class="btn btn-primary my-3" id="enviar" onclick="comentar();">Enviar</button>
+      </div>
+      </form>      
     </div>
-    <div id="productos-relacionados" class="img-productinfo"></div>
+    <div  class="row container p-0 m-0">
+      <hr>
+      <h5>Productos relacionados</h5>
+      <div class="row" id="productos-relacionados">  
+      </div>
+    </div>
   </main>
   <footer class="text-muted">
     <div class="container">

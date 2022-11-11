@@ -55,21 +55,27 @@
 
         <h6 class="direccion">Direccion de envío</h6>
         <div class="direccion">
+          <div>
           <label for="calle">Calle:</label> 
           <input  class="form-control" type="text" id="calle" name="calle" required>
           <div class="invalid-feedback">
             Ingresa una calle
           </div>
+          </div>
+          <div>
           <label for="numero">Numero:</label>
           <input type="text" class="form-control" id="numero" name="numero" required><br>
           <div class="invalid-feedback">
             Ingresa un numero
           </div>
+        </div>
+        <div>
           <label for="esquina">Esquina:</label><br>
           <input  class="form-control" type="text" id="esquina" name="esquina" required>
           <div class="invalid-feedback">
             Ingresa una esquina
           </div>
+        </div>
         </div>
       </div> 
     </div>
@@ -132,21 +138,27 @@
                     Tarjeta de credito
                   </label>
                   <hr>
+                  <div>
                   <label name="number-tarjeta" for="num-tarjeta-cred">Numero de tarjeta</label>
                   <input type="number" name="number-tarjeta" id="numtarjetacred" required>
                   <div class="invalid-feedback">
                     Ingresa un numero de tarjeta
                   </div>
+                </div>
+                <div>
                   <label name="codigo-tarjeta" for="cod-tarjeta">Codigo de seguridad</label>
                   <input type="number" name="cod-tarjeta" id="codtarjeta" required>
                   <div class="invalid-feedback">
                     Ingresa el codigo de seguridad
                   </div>
+                </div>
+                <div>
                   <label name="vencimiento-tarjeta" for="venctarjeta">Vencimiento</label>
                   <input type="date" name="vencimiento-tarjeta" id="venctarjeta" required>
                   <div class="invalid-feedback">
                     Ingresa la fecha de vencimiento
                   </div>
+                </div>
                   <hr>
                 </div>
                 <div class="form-check">
@@ -155,11 +167,13 @@
                     Transferencia bancaria 
                   </label>
                   <hr>
+                  <div>
                   <label name="number-tarjeta" for="num-tarjeta-tranf">Numero de cuenta</label>
                   <input type="number" name="number-tarjeta" id="numtarjetatranf" required>
                   <div class="invalid-feedback">
                     Ingresa un numero de cuenta
                   </div>
+                </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrar" onclick="cerrarpago()">Cerrar</button>
@@ -170,7 +184,7 @@
       </div>
     </div>
     <div class="d-grid gap-2">
-      <button class="btn btn-primary cart" type="submit" onclick="cerrarpago()">Finalizar compra</button>
+      <button class="btn btn-primary cart" type="submit" onclick="cerrarpago();vaciarcarrito()">Finalizar compra</button>
     </div>
     <div id="success"></div>
   </form>

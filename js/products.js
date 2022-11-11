@@ -5,6 +5,7 @@ const ORDER_BY_PROD_LCOST = "L$";
 const ORDER_BY_PROD_REL = "Rel";
 let currentProductsArray = [];
 let currentSortCriteria = undefined;
+let divListaProductos = document.getElementById('products');
 
 function setProductosID(id) {
     localStorage.setItem("productosID", id);
@@ -15,7 +16,7 @@ function setProductosID(id) {
 document.addEventListener('DOMContentLoaded', function(){
 
     const PRODUCTOS_URL = 'https://japceibal.github.io/emercado-api/cats_products/'+localStorage.getItem("catID")+'.json';
-    let divListaProductos = document.getElementById('products');
+   
     let rangeFilterCountMin = document.getElementById('rangeFilterCountMin');
     let rangeFilterCountMax = document.getElementById('rangeFilterCountMax');
     let rangeFilterCount = document.getElementById('rangeFilterCount');
@@ -51,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
     }
-
+   
+    
     fetch(PRODUCTOS_URL) 
     .then(respuesta => respuesta.json()) 
     .then(datos => {
@@ -153,4 +155,37 @@ document.addEventListener('DOMContentLoaded', function(){
  
 })
 
+function buscarArticulos() {
+    let buscador = document.getElementById("buscador").value.toLowerCase();
+    let resutadoBusqueda =" ";
 
+    for (let i=0; i < productos.length; i++){
+        
+        if ((productos[i].name.toLowerCase().includes(buscador)) || (productos[i].description.toLowerCase().includes(buscador))){
+           
+           resutadoBusqueda  += 
+            `
+            <div onclick="setProductosID(`+ productos[i].id +`)" class="list-group-item list-group-item-action">   
+                <div class="row">
+                    <div class="col-3">
+                            <img src="` + productos[i].image + `" alt="product image" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div class="mb-1">
+                            <h4> ` + productos[i].name + `-` + productos[i].currency + productos[i].cost + `</h4> 
+                            <p> ` + productos[i].description + `</p> 
+                            </div>
+                            <small class="text-muted">` + productos[i].soldCount + ` vendidos</small>
+                                
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+                
+            `;
+        divListaProductos.innerHTML = resutadoBusqueda;
+    } 
+}
+}
