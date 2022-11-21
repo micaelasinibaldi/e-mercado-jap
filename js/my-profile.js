@@ -2,6 +2,7 @@ let infousuarios = [];
 if (localStorage.getItem('InfoUsuarios')) {
     infousuarios = JSON.parse(localStorage.getItem('InfoUsuarios'));
 }
+console.log(infousuarios); 
 
 let conteoID = 0;
 if (localStorage.getItem('conteoID')) {
@@ -14,31 +15,10 @@ let apellido1 = document.getElementById("primerApellido");
 let apellido2 = document.getElementById("segundoApellido");
 let email = document.getElementById("E-mail");
 email.value = localStorage.getItem("email");
-let imagenPerfil = document.getElementById("imagenPerfil");
-let divImgActual = document.getElementById("imgActual");
+let cambiarImagenPerfil = document.getElementById("cambiarImagenPerfil");
+let imgActual = document.getElementById("imgActual");
+let divImg = document.getElementById("divImg");
 
-
-imagenPerfil.addEventListener('change', function(e) {
-    var file = imagenPerfil.files[0];
-    var imageType = /image.*/;
-
-    if (file.type.match(imageType)) {
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            divImgActual.innerHTML = "";
-
-            var img = new Image();
-            img.src = reader.result;
-
-            divImgActual.appendChild(img);
-        }
-
-        reader.readAsDataURL(file); 
-    } else {
-        fileDisplayArea.innerHTML = "File not supported!"
-    }
-});
 for (let i=0; i < infousuarios.length; i++){
 
     if (infousuarios[i].Email.includes(email.value)){
@@ -47,14 +27,49 @@ for (let i=0; i < infousuarios.length; i++){
         nombre2.value = infousuarios[i].Nombre2;
         apellido2.value = infousuarios[i].Apellido2;
         apellido1.value = infousuarios[i].Apellido;
+        if (infousuarios[i].Image === undefined){
+
+            imgActual.src = "/img/img_perfil.png";
+        } else{
+            imgActual.src = infousuarios[i].Image;
+        }
+        
     }
 }
+
+cambiarImagenPerfil.addEventListener('change', function(e) {
+    var file = cambiarImagenPerfil.files[0];
+    var imageType = /image.*/;
+
+    if (file.type.match(imageType)) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            divImg.innerHTML = "";
+
+            var img = new Image();
+            img.src = reader.result;
+            img.id= "imgActualizada";
+            img.classList.add("img-perfil");
+
+            divImg.appendChild(img);
+        }
+
+        reader.readAsDataURL(file); 
+    } else {
+        document.getElementById("avisoImg").innerHTML = "Archivo no soportado!";
+        document.getElementById("avisoImg").classList.add("seleccionpago");
+    }
+
+   
+});
+
 
 function actualizarInfoUsuarios() {
     localStorage.setItem('InfoUsuarios', JSON.stringify(infousuarios));
 }
 
-console.log(infousuarios); 
+
 
 function crearID() {
     conteoID++;
@@ -74,6 +89,9 @@ function guardarcambios(){
            infousuarios[i].Apellido2 = apellido2.value;
            infousuarios[i].Apellido = apellido1.value;
            infousuarios[i].Email = email.value;
+           infousuarios[i].Image = imgActualizada.src;
+
+           console.log(imgActualizada.src);
            
        } 
    }
@@ -87,6 +105,7 @@ function guardarcambios(){
              "Apellido": (apellido1.value),
              "Apellido2": (apellido2.value),
              "Email": (email.value),
+             "Image": (imgActual.src),
          };
      
          infousuarios.push(usuario);
