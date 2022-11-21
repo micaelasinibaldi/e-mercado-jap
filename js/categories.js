@@ -7,7 +7,7 @@ let minCount = undefined;
 let maxCount = undefined;
 divCatlist =  document.getElementById("cat-list-container");
 
-function sortCategories(criteria, array){
+function sortCategories(criteria, array){ //  ORDENA CATEGORIAS
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)
     {
@@ -36,12 +36,12 @@ function sortCategories(criteria, array){
     return result;
 }
 
-function setCatID(id) {
+function setCatID(id) { // GUARDA EL ID Y LLEVA AL HTML DE LOS PRODUCTOS DE CADA CATEGORIA, SE LLAMA AL ID GUARDADO EN EL LOCALSTORAGE DESDE LA URL DEL FETCH 
     localStorage.setItem("catID", id);
-    window.location = "products.html"
+    window.location = "products.html";
 }
 
-function showCategoriesList(){
+function showCategoriesList(){ //  MUESTRA CADA CATEGORIA 
 
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
@@ -65,14 +65,14 @@ function showCategoriesList(){
                     </div>
                 </div>
             </div>
-            `
+            `;
         }
 
         divCatlist.innerHTML = htmlContentToAppend;
     }
 }
 
-function sortAndShowCategories(sortCriteria, categoriesArray){
+function sortAndShowCategories(sortCriteria, categoriesArray){ // ORDENA Y MUESTRA CADA CATEGORIA SEGUN CRITERIO
     currentSortCriteria = sortCriteria;
 
     if(categoriesArray != undefined){
@@ -97,19 +97,19 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     });
 
-    document.getElementById("sortAsc").addEventListener("click", function(){
+    document.getElementById("sortAsc").addEventListener("click", function(){ // ORDENA AZ
         sortAndShowCategories(ORDER_ASC_BY_NAME);
     });
 
-    document.getElementById("sortDesc").addEventListener("click", function(){
+    document.getElementById("sortDesc").addEventListener("click", function(){ // ORDENA ZA
         sortAndShowCategories(ORDER_DESC_BY_NAME);
     });
 
-    document.getElementById("sortByCount").addEventListener("click", function(){
+    document.getElementById("sortByCount").addEventListener("click", function(){ // ORDENA CANT. VENDIDOS 
         sortAndShowCategories(ORDER_BY_PROD_COUNT);
     });
 
-    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){ //LIMPIA
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
 

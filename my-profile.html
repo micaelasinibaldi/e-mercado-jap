@@ -54,8 +54,10 @@
     <div class="container col-lg-6">
       <div class= "p-6">
         <br>
-        <h2>Perfil</h2>
-        <br>
+        <div class="img-perfil" id="imgActual">
+          <img   src="/img/img_perfil.png"></img>
+         </div>
+         <h2>Perfil</h2>
         <hr>
       </div>
       <form class="row g-3 needs-validation" novalidate>
@@ -94,7 +96,7 @@
           <label for="profileImage" class="form-label">Imagen de perfil</label>
           <input type="file" class="form-control" aria-label="file example" name="profileImage" id="imagenPerfil">
         </div>
-       
+     
         <div class="col-12">
           <button class="btn btn-primary" type="submit" id="btnGuardar" onclick="guardarcambios();">Guardar cambios</button>
         </div>

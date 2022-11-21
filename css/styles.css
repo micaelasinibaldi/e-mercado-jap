@@ -263,6 +263,12 @@ width: 50px;
 
 }
 
+.img-perfil{
+  width: 200px;
+  margin-left: 80%;
+  float: right;
+}
+
 .cart{
   width: 60%;
   margin-left: 20%;

@@ -14,7 +14,31 @@ let apellido1 = document.getElementById("primerApellido");
 let apellido2 = document.getElementById("segundoApellido");
 let email = document.getElementById("E-mail");
 email.value = localStorage.getItem("email");
+let imagenPerfil = document.getElementById("imagenPerfil");
+let divImgActual = document.getElementById("imgActual");
 
+
+imagenPerfil.addEventListener('change', function(e) {
+    var file = imagenPerfil.files[0];
+    var imageType = /image.*/;
+
+    if (file.type.match(imageType)) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            divImgActual.innerHTML = "";
+
+            var img = new Image();
+            img.src = reader.result;
+
+            divImgActual.appendChild(img);
+        }
+
+        reader.readAsDataURL(file); 
+    } else {
+        fileDisplayArea.innerHTML = "File not supported!"
+    }
+});
 for (let i=0; i < infousuarios.length; i++){
 
     if (infousuarios[i].Email.includes(email.value)){

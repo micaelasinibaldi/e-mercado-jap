@@ -1,5 +1,5 @@
 let articuloscart = [];
-let articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));
+let articuloscarrito = [];
 if (localStorage.getItem("prodCarrito") !== null) articuloscarrito = JSON.parse(localStorage.getItem("prodCarrito"));
 let DivTablaCarrito = document.getElementById("container");
 let DivTotal = document.getElementById("total");
@@ -144,12 +144,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 <th scope="col">Costo</th>
                 <th scope="col"class="td-img">Cantidad</th>
                 <th scope="col">Subtotal</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>`;
-    if (articuloscarrito.length == 0){
+    if (articuloscarrito.length === 0){
         DivTablaCarrito.innerHTML = `
-        <div class="cart" ><p> No tienes ningun articulo en el carrito</p></div>`;
+        <div class="cart"><p> No tienes ningun articulo en el carrito</p></div>`;
       } else {
     
     for (let i = 0; i < articuloscarrito.length; i++) {
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${articuloscarrito[i].name}</td>
                 <td>${articuloscarrito[i].currency}  ${articuloscarrito[i].cost}</td>
                 <td><input class="img-cart"  type="number" id="cant" min="1" max"100" value="1"  onchange="setValue();"></input></td>
-                <td> 
+                <td>
                   `;
       if (articuloscarrito[i].currency !== 'USD') {
         contenidoTabla +=
