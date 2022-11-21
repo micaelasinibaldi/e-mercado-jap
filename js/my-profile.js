@@ -18,6 +18,7 @@ email.value = localStorage.getItem("email");
 let cambiarImagenPerfil = document.getElementById("cambiarImagenPerfil");
 let imgActual = document.getElementById("imgActual");
 let divImg = document.getElementById("divImg");
+let avisoArchImg = document.getElementById("avisoImg");
 
 for (let i=0; i < infousuarios.length; i++){
 
@@ -57,8 +58,8 @@ cambiarImagenPerfil.addEventListener('change', function(e) {
 
         reader.readAsDataURL(file); 
     } else {
-        document.getElementById("avisoImg").innerHTML = "Archivo no soportado!";
-        document.getElementById("avisoImg").classList.add("seleccionpago");
+        avisoArchImg.innerHTML = "Archivo no soportado!";
+        avisoArchImg.classList.add("seleccionpago");
     }
 
    
